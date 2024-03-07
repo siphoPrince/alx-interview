@@ -4,13 +4,15 @@
 
 def pascal_triangle(n):
     """
-    This function generates Pascal's triangle up to the given number of rows (n).
+    This function generates Pascal's triangle up
+    to the given number of rows (n).
 
     Args:
         n: The number of rows to generate in the Pascal's triangle.
 
     Returns:
-        A list of lists representing the Pascal's triangle. Returns an empty list if n <= 0.
+        A list of lists representing the Pascal's
+        triangle. Returns an empty list if n <= 0.
     """
 
     if n <= 0:
@@ -26,6 +28,7 @@ def pascal_triangle(n):
         triangle.append(new_row)
 
     return triangle
+
 
 def print_pascal_triangle(triangle):
     """
