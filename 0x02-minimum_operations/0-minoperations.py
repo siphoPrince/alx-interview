@@ -11,14 +11,15 @@ def minOperations(n):
     The minimum number of operations needed, or 0 if impossible.
     """
 
-    if n == 0:
+    if n <= 1:
         return 0
-    if n == 1:
-        return 1
-
-    dp = [0] * (n + 1)
-
+    
+    dp = [float('inf')] * (n + 1)
+    dp[1] = 0
+    
     for i in range(2, n + 1):
-        dp[i] = min(dp[i - 1] + 1, dp[i // 2] + 1)
-
-    return dp[n]
+        for j in range(1, i):
+            if i % j == 0:
+                dp[i] = min(dp[i], dp[j] + i // j)
+    
+    return dp[n] if dp[n] != float('inf') else 0
