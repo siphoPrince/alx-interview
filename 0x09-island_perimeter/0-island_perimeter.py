@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ 3d array"""
 
+
 def island_perimeter(grid):
     """
     Calculates the perimeter of the island in a grid.
@@ -19,11 +20,11 @@ def island_perimeter(grid):
         for j in range(cols):
             if grid[i][j] == 1:
                 perimeter += 4
-                
+
                 # Check left neighbor
                 if j > 0 and grid[i][j - 1] == 1:
                     perimeter -= 2
-                
+
                 # Check top neighbor
                 if i > 0 and grid[i - 1][j] == 1:
                     perimeter -= 2
