@@ -2,19 +2,16 @@
 """ 3d array"""
 
 def island_perimeter(grid):
-  """
-  Calculates the perimeter of the island in a grid.
-
-  Args:
-      grid: A list of lists of integers representing the grid.
-          - 0 represents water.
-          - 1 represents land.
-
-  Returns:
-      The perimeter of the island (integer).
-  """
-
-  perimeter = 0
+    """
+    Calculates the perimeter of the island in a grid.
+    Args:
+    grid: A list of lists of integers representing the grid.
+    - 0 represents water.
+    - 1 represents land.
+    Returns:
+    The perimeter of the island (integer).
+    """
+    perimeter = 0
     rows = len(grid)
     cols = len(grid[0])
 
