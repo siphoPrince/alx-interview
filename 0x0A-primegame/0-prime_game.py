@@ -3,6 +3,7 @@
 
 
 def generate_primes(n):
+    """main generate random"""
     primes = []
     sieve = [True] * (n+1)
     sieve[0] = sieve[1] = False
@@ -16,14 +17,23 @@ def generate_primes(n):
             primes.append(i)
     return primes
 
-
 def isWinner(x, nums):
+    """checks if its winner"""
     def can_win(n, primes):
         if n <= 1:
             return False
         if n in primes:
             return True
-        return len([p for p in primes if n % p == 0]) % 2 == 0
+        prime_factors = 0
+        for p in primes:
+            if p * p > n:
+                break
+            while n % p == 0:
+                prime_factors += 1
+                n //= p
+        if n > 1:
+            prime_factors += 1
+        return prime_factors % 2 == 0
 
     primes = generate_primes(max(max(nums), 10))
     maria_wins = 0
