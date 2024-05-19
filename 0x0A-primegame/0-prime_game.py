@@ -1,49 +1,48 @@
 #!/usr/bin/python3
-"""using  prime generator"""
+"""main codebase"""
 
-
-def generate_primes(n):
-    """main generate random"""
-    primes = []
-    sieve = [True] * (n+1)
-    sieve[0] = sieve[1] = False
-    for i in range(2, int(n**0.5)+1):
-        if sieve[i]:
-            primes.append(i)
-            for j in range(i*i, n+1, i):
-                sieve[j] = False
-    for i in range(int(n**0.5)+1, n+1):
-        if sieve[i]:
-            primes.append(i)
-    return primes
 
 def isWinner(x, nums):
-    """checks if its winner"""
-    def can_win(n, primes):
-        if n <= 1:
-            return False
-        if n in primes:
-            return True
-        prime_factors = 0
-        for p in primes:
-            if p * p > n:
-                break
-            while n % p == 0:
-                prime_factors += 1
-                n //= p
-        if n > 1:
-            prime_factors += 1
-        return prime_factors % 2 == 0
+    """main winner function"""
+    if not nums or x < 1:
+        return None
+    max_n = max(nums)
 
-    primes = generate_primes(max(max(nums), 10))
+    sieve = [True] * (max_n + 1)
+    sieve[0] = sieve[1] = False  # 0 and 1 are not primes
+
+    p = 2
+    while p * p <= max_n:
+        if sieve[p]:
+            for i in range(p * p, max_n + 1, p):
+                sieve[i] = False
+        p += 1
+
+    def play_game(n):
+        primes = [i for i in range(2, n + 1) if sieve[i]]
+        moves = 0
+        while primes:
+            prime = primes.pop(0)
+            primes = [num for num in primes if num % prime != 0]
+            moves += 1
+        return moves
+
     maria_wins = 0
-    for n in nums:
-        if can_win(n, primes):
-            maria_wins += 1
+    ben_wins = 0
 
-    if maria_wins > x - maria_wins:
+    for n in nums:
+        if n < 2:
+            ben_wins += 1
+        else:
+            moves = play_game(n)
+            if moves % 2 == 0:
+                ben_wins += 1
+            else:
+                maria_wins += 1
+
+    if maria_wins > ben_wins:
         return "Maria"
-    elif maria_wins < x - maria_wins:
+    elif ben_wins > maria_wins:
         return "Ben"
     else:
         return None
